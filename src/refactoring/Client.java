@@ -38,21 +38,21 @@ public class Client {
         return lloguers.contains(lloguer);
     }
 
-    public String informe() {
+    //public String informe() {
         //double total = 0;
         //int bonificacions = 0;
         /*String resultat = "Informe de lloguers del client " +
             getNom() +
             " (" + getNif() + ")\n";*/
-        for (Lloguer lloguer: lloguers) {
+        //for (Lloguer lloguer: lloguers) {
         	
         	//bonificacions += lloguer.bonificacions();
         	
-            String resultat += "\t" +	//Falta arreglar
+            /*String resultat += "\t" +
                 lloguer.getVehicle().getMarca() +
                 " " +
                 lloguer.getVehicle().getModel() + ": " +
-                (lloguer.quantitat() * 30) + "€" + "\n";
+                (lloguer.quantitat() * 30) + "€" + "\n";*/
             
             //total += lloguer.quantitat() * 30;
             
@@ -74,19 +74,37 @@ public class Client {
 	            quantitat += lloguer.getDies() * 6;
 	            break;
 	    	}*/
-        }
+        //}
 
         // afegeix informació final
-        resultat += "Import a pagar: " + importeTotal() + "€\n" +
+        /*resultat += "Import a pagar: " + importeTotal() + "€\n" +
             "Punts guanyats: " + bonificacionsTotals() + "\n";
-        return resultat;
-    }
+        return resultat;*/
+    //}
     
     public String composaCapsalera() {
     	String resultat = "Informe de lloguers del client " +
                 getNom() +
                 " (" + getNif() + ")\n";
     	return resultat;
+    }
+    
+    public String composaDetall() {
+    	String resultat = "";
+    	for (Lloguer lloguer: lloguers) {
+    	resultat += "\t" +
+                lloguer.getVehicle().getMarca() +
+                " " +
+                lloguer.getVehicle().getModel() + ": " +
+                (lloguer.quantitat() * 30) + "€" + "\n";
+    	}
+    	return resultat;
+    }
+    
+    public String composaPeu() {
+    	String resultat = "Import a pagar: " + importeTotal() + "€\n" +
+                "Punts guanyats: " + bonificacionsTotals() + "\n";
+            return resultat;
     }
     
     public String informe() {
