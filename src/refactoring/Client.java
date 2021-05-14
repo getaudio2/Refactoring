@@ -7,6 +7,7 @@ public class Client {
     private String nom;
     private String telefon;
     private Vector<Lloguer> lloguers;
+    private static final double EUROS_PER_UNITAT_DE_COST = 30;
 
     public Client(String nif, String nom, String telefon) {
         this.nif = nif;
@@ -83,27 +84,28 @@ public class Client {
     //}
     
     public String composaCapsalera() {
-    	String resultat = "Informe de lloguers del client " +
+    	String resultat = "<h1>Informe de lloguers</h1>\n" + "<p>Informe de lloguers del client <em>" +
                 getNom() +
-                " (" + getNif() + ")\n";
+                "</em> (<strong>" + getNif() + "</strong>)</p>\n";
     	return resultat;
     }
     
     public String composaDetall() {
-    	String resultat = "";
+    	String resultat = "<table>\n" + "<tr><td><strong>Marca</strong></td><td><strong>Model</strong></td><td><strong>Import</strong></td></tr>\n";
     	for (Lloguer lloguer: lloguers) {
-    	resultat += "\t" +
+    	resultat += "\t<tr><td>" +
                 lloguer.getVehicle().getMarca() +
-                " " +
-                lloguer.getVehicle().getModel() + ": " +
-                (lloguer.quantitat() * 30) + "€" + "\n";
+                "</td><td>" +
+                lloguer.getVehicle().getModel() + "</td><td>" +
+                (lloguer.quantitat() * EUROS_PER_UNITAT_DE_COST) + "€" + "</td></tr>\n";
     	}
+    	resultat += "</table>\n";
     	return resultat;
     }
     
     public String composaPeu() {
-    	String resultat = "Import a pagar: " + importeTotal() + "€\n" +
-                "Punts guanyats: " + bonificacionsTotals() + "\n";
+    	String resultat = "<p>Import a pagar: <em>" + importeTotal() + "€</em></p>\n" +
+                "<p>Punts guanyats: <em>" + bonificacionsTotals() + "</em></p>\n";
             return resultat;
     }
     
@@ -116,7 +118,7 @@ public class Client {
     public double importeTotal() {
     	double total=0;
     	for (Lloguer lloguer: lloguers) {
-    		total += lloguer.quantitat() * 30;
+    		total += lloguer.quantitat() * EUROS_PER_UNITAT_DE_COST;
     	}
     	return total;
     }
